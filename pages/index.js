@@ -4,6 +4,7 @@ import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/popupwithform.js";
+import Api from "../components/Api.js";
 import {
   initialCards,
   settingsValidator,
@@ -11,6 +12,11 @@ import {
   addimg
 } from "../src/utils.js";
 
+/**
+ * conectamos con el servidor meidante una la sig pagina y con la authorizacion
+ */
+const api = new Api("https://around-api.es.tripleten-services.com/v1",
+  { authorization: "ccd6733f-8fc2-4817-8533-321a6421c44d", "Content-Type": "application/json", });
 
 /**
  * constiene todods los fiormularios
@@ -32,7 +38,22 @@ const handleCardClick = (link, name) => {
 /**
  * mostramos los card desde un principio
  */
-const cardList = new Section(
+api.getInitialCards().then((cards) => {
+  const cardList = new Section(
+    {
+      items: cards,
+      renderer: (item) => {
+        const cardItem = new Card(item, "#card-template", handleCardClick);
+        cardList.addItem(cardItem.getCreateCard());
+      }
+    }, "#place");
+  cardList.renderer();
+})
+  .then((err) => {
+    console.log(`Hay un error : ${err}`);
+  })
+
+/*const cardList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
@@ -41,7 +62,7 @@ const cardList = new Section(
     }
   }, "#place");
 
-cardList.renderer();
+cardList.renderer(); */
 
 /**
  * inicializamos user info

@@ -1,5 +1,5 @@
 const initialCards = [
-  {
+  /* {
     name: "Valle de Yosemite",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
   },
@@ -22,7 +22,7 @@ const initialCards = [
   {
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
+  }, */
 ];
 
 /**
