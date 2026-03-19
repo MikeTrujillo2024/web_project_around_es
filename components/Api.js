@@ -21,4 +21,14 @@ export default class Api {
         })
             .then(res => this._checkRes(res))
     }
+    
+
+    getUserInfo(){
+        return fetch(`${this._baseUrl}/users/me`,{
+            method:"GET",
+            headers:this._headers
+        })
+        .then(user=>this._checkRes(user))
+        
+    }
 }

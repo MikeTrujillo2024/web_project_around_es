@@ -45,4 +45,8 @@ const settingsValidator = {
 
 const getinfo = document.querySelector(".profile__info_edit_button"); //boton que selecciona el boton de editar user
 const addimg = document.querySelector(".profile__info-button-add"); //boton que selecciona el boton de editar user
-export { initialCards, settingsValidator, getinfo, addimg }
+/**
+ * constiene todods los formularios
+ */
+const formElements = document.querySelectorAll(settingsValidator.formSelector);
+export { initialCards, settingsValidator, getinfo, addimg, formElements}
