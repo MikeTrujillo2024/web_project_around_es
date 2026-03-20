@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
         this._form = this._popup.querySelector(".popup__container");
         //obtenemos los datos de todos los inputs que registe en el formulario
         this._formInputs = Array.from(this._form.querySelectorAll(".popup__input"));
+        
 
     }
 
@@ -32,6 +33,7 @@ export default class PopupWithForm extends Popup {
         this._popup.addEventListener("submit", (evt) => {
             evt.preventDefault();
             this._submitCallback(this._getInputValues())
+            /* console.log(this._getInputValues()); */
         })
     }
 

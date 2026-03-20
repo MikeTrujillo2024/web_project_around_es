@@ -28,7 +28,18 @@ export default class Api {
             method:"GET",
             headers:this._headers
         })
+        .then(user=>this._checkRes(user))        
+    }
+
+    editUserInfo(data){
+        return fetch(`${this._baseUrl}/users/me`,{
+            method:"PATCH",
+            headers: this._headers,
+            body: JSON.stringify({
+                name:data.name,
+                about:data.about
+            })
+        })
         .then(user=>this._checkRes(user))
-        
     }
 }

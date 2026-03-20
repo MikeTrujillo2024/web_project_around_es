@@ -11,6 +11,15 @@ export default class UserInfo {
     }
 
     /**
+     * esta funcion va a convertir la primera letra en mayuscula las demas letras las convertira en minusculas
+     * si la funcion tiene datos vacios este regresara algo vacio
+     */
+    _UcFirst(str){
+         if (!str) return str
+        return str[0].toUpperCase()+str.slice(1).toLowerCase()
+    }
+
+    /**
      * este metodo devuelve un objeto con la informacion sobre el usuario
      */
     getUserInfo() {
@@ -27,8 +36,8 @@ export default class UserInfo {
      * toma los datos del nuevo usuario y los agrega en la pagina
      */
     setUserInfo({ name, about }) {
-        this._nameUser.textContent = name;
-        this._aboutUser.textContent = about;
+        this._nameUser.textContent = this._UcFirst(name);
+        this._aboutUser.textContent = this._UcFirst(about);
         
     }
 

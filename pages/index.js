@@ -6,7 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/popupwithform.js";
 import Api from "../components/Api.js";
 import {
-  initialCards,
+  btn_popup__save,
   settingsValidator,
   getinfo,
   addimg,
@@ -31,13 +31,55 @@ const user = new UserInfo({ selectorName: ".profile__name", selectorAbout: ".pro
  */
 api.getUserInfo()
   .then((usr) => {
+    /* console.log(usr) */
     user.setUserInfo({name: usr.name,about: usr.about});
     user.setUserAvatar(usr.avatar);
   })
   .catch((err) => console.log(`error en el usuario: ${err}`))
 
 
+/**
+ * inicializamos popupwith form para editar el formularios
+ */
+const profilePopup = new PopupWithForm({
+  selector: "#popup-profile",
+  submitCallback: (formData) => {
+     
+    user.setUserInfo({
+      name: formData.name__user,
+      about: formData.about
+    });
+    api.editUserInfo({name:formData.name__user, about:formData.about})
+    .then(()=>{console.log(btn_popup__save.textContent)})
+    .catch((err)=>{
+      console.log(`ERRO IDENTIFICADO: ${err}`)
+    })
+    .finally(()=>{
+      /* profilePopup.close(); */
+  })
+  }
+});
+
+profilePopup.setEventListeners();
+
+/**
+ * abrir modal de edit user info
+ */
+getinfo.addEventListener("click", () => {
+  const { name, about } = user.getUserInfo();
+document.querySelector("#input__popup_name_Editar").value = name;
+  document.querySelector("#input_popup_about").value = about;
   
+
+  profilePopup.open()
+});
+
+
+
+
+
+
+
   /**
  * mostramos los card desde un principio
  */
@@ -68,41 +110,6 @@ const handleCardClick = (link, name) => {
 }
 
 
-
-
-
-
-
-
-
-
-/**
- * inicializamos popupwith form para editar el formularios
- */
-const profilePopup = new PopupWithForm({
-  selector: "#popup-profile",
-  submitCallback: (formData) => {
-    user.setUserInfo({
-      name: formData.name__user,
-      about: formData.about
-    });
-    profilePopup.close();
-  }
-});
-
-profilePopup.setEventListeners();
-
-/**
- * abrir modal de edit user info
- */
-getinfo.addEventListener("click", () => {
-  const { name, about } = user.getUserInfo();
-
-  document.querySelector("#input__popup_name_Editar").value = name;
-  document.querySelector("#input_popup_about").value = about;
-
-  profilePopup.open()
-});
 
 /**
  * abrir el modal para agregar una nueva imagen
