@@ -21,25 +21,36 @@ export default class Api {
         })
             .then(res => this._checkRes(res))
     }
-    
 
-    getUserInfo(){
-        return fetch(`${this._baseUrl}/users/me`,{
-            method:"GET",
-            headers:this._headers
-        })
-        .then(user=>this._checkRes(user))        
-    }
-
-    editUserInfo(data){
-        return fetch(`${this._baseUrl}/users/me`,{
-            method:"PATCH",
+    addCard(data) {
+        return fetch(`${this._baseUrl}/cards`, {
+            method: "POST",
             headers: this._headers,
-            body: JSON.stringify({
-                name:data.name,
-                about:data.about
+            body: json.stringify({
+                name: data.name,
+                link: data.link
             })
         })
-        .then(user=>this._checkRes(user))
+    }
+
+
+    getUserInfo() {
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: "GET",
+            headers: this._headers
+        })
+            .then(user => this._checkRes(user))
+    }
+
+    editUserInfo(data) {
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: "PATCH",
+            headers: this._headers,
+            body: JSON.stringify({
+                name: data.name,
+                about: data.about
+            })
+        })
+            .then(user => this._checkRes(user))
     }
 }

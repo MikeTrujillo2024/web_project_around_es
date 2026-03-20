@@ -12,7 +12,7 @@ import {
   addimg,
   formElements
 } from "../src/utils.js";
-
+let cardList;
 /**
  * conectamos con el servidor meidante una la sig pagina y con la authorizacion
  */
@@ -22,7 +22,7 @@ const api = new Api("https://around-api.es.tripleten-services.com/v1",
 /**
 * inicializamos user info
 */
-const user = new UserInfo({ selectorName: ".profile__name", selectorAbout: ".profile__about",selectoravatar: ".profile__image" });
+const user = new UserInfo({ selectorName: ".profile__name", selectorAbout: ".profile__about", selectoravatar: ".profile__image" });
 
 
 
@@ -32,7 +32,7 @@ const user = new UserInfo({ selectorName: ".profile__name", selectorAbout: ".pro
 api.getUserInfo()
   .then((usr) => {
     /* console.log(usr) */
-    user.setUserInfo({name: usr.name,about: usr.about});
+    user.setUserInfo({ name: usr.name, about: usr.about });
     user.setUserAvatar(usr.avatar);
   })
   .catch((err) => console.log(`error en el usuario: ${err}`))
@@ -44,19 +44,28 @@ api.getUserInfo()
 const profilePopup = new PopupWithForm({
   selector: "#popup-profile",
   submitCallback: (formData) => {
-     
-    user.setUserInfo({
-      name: formData.name__user,
-      about: formData.about
-    });
-    api.editUserInfo({name:formData.name__user, about:formData.about})
-    .then(()=>{console.log(btn_popup__save.textContent)})
-    .catch((err)=>{
-      console.log(`ERRO IDENTIFICADO: ${err}`)
-    })
-    .finally(()=>{
-      /* profilePopup.close(); */
-  })
+    btn_popup__save.textContent = "ACTUALIZANDO..."
+    api.editUserInfo({ name: formData.name__user, about: formData.about })
+      .then(() => {
+        user.setUserInfo({
+          name: formData.name__user,
+          about: formData.about
+        });
+        setTimeout(() => {
+          btn_popup__save.textContent = "Guardar";
+          profilePopup.close()
+        }, 2000)
+      })
+      .catch((err) => {
+        btn_popup__save.textContent = `${err}`;
+        setTimeout(() => {
+          btn_popup__save.textContent = "Guardar";
+          profilePopup.close()
+        }, 2000)
+      })
+      .finally(() => {
+
+      })
   }
 });
 
@@ -67,24 +76,19 @@ profilePopup.setEventListeners();
  */
 getinfo.addEventListener("click", () => {
   const { name, about } = user.getUserInfo();
-document.querySelector("#input__popup_name_Editar").value = name;
+  document.querySelector("#input__popup_name_Editar").value = name;
   document.querySelector("#input_popup_about").value = about;
-  
+
 
   profilePopup.open()
 });
 
 
-
-
-
-
-
-  /**
- * mostramos los card desde un principio
- */
+/**
+* mostramos los card desde un principio
+*/
 api.getInitialCards().then((cards) => {
-  const cardList = new Section(
+  cardList = new Section(
     {
       items: cards,
       renderer: (item) => {
@@ -93,6 +97,7 @@ api.getInitialCards().then((cards) => {
       }
     }, "#place");
   cardList.renderer();
+  /* console.log(cards) */
 })
   .catch((err) => {
     console.log(`Hay un error : ${err}`);
@@ -127,6 +132,7 @@ const addNewImage = new PopupWithForm({
       handleCardClick
 
     );
+
     cardList.addItem(newCard.getCreateCard());
     addNewImage.close();
   }
