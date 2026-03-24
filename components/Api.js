@@ -7,6 +7,12 @@ export default class Api {
         this._headers = headers;
     }
 
+    /**
+     * 
+     *verifica que la respuesta del api sea correcta si
+     *no es ok manda el error
+     */
+
     _checkRes(res) {
         if (res.ok) {
             return res.json();
@@ -14,6 +20,10 @@ export default class Api {
         return Promise.reject(`Error: ${res.status}`);
     }
 
+    /**
+     * 
+     * muestra las cards cuando carga la página
+     */
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
             method: "GET",
@@ -22,18 +32,23 @@ export default class Api {
             .then(res => this._checkRes(res))
     }
 
+
     addCard(data) {
         return fetch(`${this._baseUrl}/cards`, {
             method: "POST",
             headers: this._headers,
             body: json.stringify({
-                name: data.name,
-                link: data.link
+                name: data.titulo,
+                link: data.url
             })
         })
+        .then(card => this._checkRes(card))
     }
 
-
+/**
+ * 
+ * carga la informacion del usuiario tanto la imagen como el nombre y tipo usuario
+ */
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             method: "GET",
@@ -42,6 +57,11 @@ export default class Api {
             .then(user => this._checkRes(user))
     }
 
+    /**
+     * 
+     * @param {*} data "editamos tanto el nombre del usuario como el tipo de usaurio" 
+     * @returns 
+     */
     editUserInfo(data) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: "PATCH",

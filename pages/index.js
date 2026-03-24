@@ -123,15 +123,17 @@ const handleCardClick = (link, name) => {
 const addNewImage = new PopupWithForm({
   selector: "#popup-places",
   submitCallback: (formData) => {
-    const newCard = new Card(
-      {
-        name: formData.titulo,
-        link: formData.url
-      },
-      "#card-template",
-      handleCardClick
+    api.addCard(formData).then(() => {
+      const newCard = new Card(
+        {
+          name: formData.titulo,
+          link: formData.url
+        },
+        "#card-template",
+        handleCardClick
 
-    );
+      );
+    })
 
     cardList.addItem(newCard.getCreateCard());
     addNewImage.close();
