@@ -37,18 +37,18 @@ export default class Api {
         return fetch(`${this._baseUrl}/cards`, {
             method: "POST",
             headers: this._headers,
-            body: json.stringify({
+            body: JSON.stringify({
                 name: data.titulo,
                 link: data.url
             })
         })
-        .then(card => this._checkRes(card))
+            .then(card => this._checkRes(card))
     }
 
-/**
- * 
- * carga la informacion del usuiario tanto la imagen como el nombre y tipo usuario
- */
+    /**
+     * 
+     * carga la informacion del usuiario tanto la imagen como el nombre y tipo usuario
+     */
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             method: "GET",
@@ -72,5 +72,17 @@ export default class Api {
             })
         })
             .then(user => this._checkRes(user))
+    }
+
+    changeLikeStatus(cardId, cardLike) {
+        const methodStatus = cardLike ? 'DELETE' : 'PUT';
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+            method: methodStatus,
+            headers: this._headers
+        })
+            .then(likes => this._checkRes(likes));
+
+        /* console.log(data.cardId);
+        console.log(data.cardLike) */
     }
 }

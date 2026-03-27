@@ -94,9 +94,29 @@ api.getInitialCards().then((cards) => {
       renderer: (item) => {
         const cardItem = new Card(item, "#card-template", handleCardClick);
         cardList.addItem(cardItem.getCreateCard());
+
       }
+
     }, "#place");
+
+  //enviamos el listenes del like
+  document.addEventListener('likeCardBtn', (e) => {
+    const { cardId, cardLike, cardClassList } = e.detail;
+    api.changeLikeStatus(cardId, cardLike)
+      .then(() => {
+        if (cardLike) {
+          cardClassList.remove("place_card_content_like--active");
+        } else {
+          cardClassList.add("place_card_content_like--active");
+        }
+      })
+      .catch((errLike) => {
+        console.log(`Hay un error aqui: ${errLike}`);
+      })
+
+  });
   cardList.renderer();
+
   /* console.log(cards) */
 })
   .catch((err) => {
@@ -123,21 +143,26 @@ const handleCardClick = (link, name) => {
 const addNewImage = new PopupWithForm({
   selector: "#popup-places",
   submitCallback: (formData) => {
-    api.addCard(formData).then(() => {
+    api.addCard(formData).then((data) => {
       const newCard = new Card(
         {
-          name: formData.titulo,
-          link: formData.url
+          name: data.name,
+          link: data.link
         },
         "#card-template",
         handleCardClick
 
       );
+      cardList.addItem(newCard.getCreateCard());
+      addNewImage.close();
+
+    }).catch((err) => {
+      console.log(`Hay un error: ${err}`)
     })
 
-    cardList.addItem(newCard.getCreateCard());
-    addNewImage.close();
+
   }
+
 });
 
 addNewImage.setEventListeners();
