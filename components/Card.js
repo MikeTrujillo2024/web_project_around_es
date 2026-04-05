@@ -54,8 +54,16 @@ export default class Card {
   _trash() {
     this._element
       .querySelector(".place__card_trash")
-      .addEventListener("click", () => {
-        this._element.remove();
+      .addEventListener("click", (e) => {
+        const eventoclickDelete = new CustomEvent(
+          'deleteCardBtn', {
+          detail: {
+            cardId: this._id
+          }
+        }
+        )
+        /* this._element.remove(); */
+        document.dispatchEvent(eventoclickDelete);
       });
   }
 

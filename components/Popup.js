@@ -6,6 +6,7 @@ export default class Popup {
         this._popup = document.querySelector(selector);
         //bind. siempre sea la clase seleccionada 
         this._handleEscClose = this._handleEscClose.bind(this);
+
     }
 
     close() {

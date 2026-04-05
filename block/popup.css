@@ -20,6 +20,7 @@
   height: 500px;
   top: 15%;
   left: 30%;
+
 }
 
 .popup__button-cancel {
@@ -46,6 +47,7 @@
   color: #000;
   border-radius: 4%;
   z-index: 2;
+
 }
 
 .popup__content {
@@ -108,9 +110,15 @@
   cursor: pointer;
 }
 
+.popup__content-message,
+.popup__content-save-message {
+  margin: 0;
+}
+
 #popup-image {
   z-index: 9;
 }
+
 .popup__img {
   width: 100%;
   height: auto;
@@ -139,6 +147,11 @@
   background-color: #c4c4c4;
   cursor: default;
 }
+
+.popup__container-confirmation {
+  height: 181px;
+}
+
 @media screen and (max-width: 768px) {
   .popup__wrap {
     position: absolute;

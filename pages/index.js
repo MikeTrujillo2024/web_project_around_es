@@ -4,6 +4,7 @@ import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/popupwithform.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import Api from "../components/Api.js";
 import {
   btn_popup__save,
@@ -31,7 +32,6 @@ const user = new UserInfo({ selectorName: ".profile__name", selectorAbout: ".pro
  */
 api.getUserInfo()
   .then((usr) => {
-    /* console.log(usr) */
     user.setUserInfo({ name: usr.name, about: usr.about });
     user.setUserAvatar(usr.avatar);
   })
@@ -116,12 +116,17 @@ api.getInitialCards().then((cards) => {
 
   });
   cardList.renderer();
-
-  /* console.log(cards) */
 })
   .catch((err) => {
     console.log(`Hay un error : ${err}`);
   })
+
+//enviamos el evento delete 
+document.addEventListener('deleteCardBtn', (e) => {
+  const detail = e.detail.cardId;
+  const popupconfirmation = new PopupWithConfirmation({ selector: "#popup-confirmation", detail: detail });
+  popupconfirmation.setEventListeners()
+})
 
 
 /***
@@ -176,3 +181,6 @@ formElements.forEach((formElement) => {
   const formvalid = new FormValidator(settingsValidator, formElement);
   formvalid.enableValidation();
 })
+
+
+/* */;
