@@ -14,6 +14,7 @@ export default class Api {
      */
 
     _checkRes(res) {
+
         if (res.ok) {
             return res.json();
         }
@@ -32,7 +33,10 @@ export default class Api {
             .then(res => this._checkRes(res))
     }
 
-
+    /**
+     * 
+     * agrega una nueva card
+     */
     addCard(data) {
         return fetch(`${this._baseUrl}/cards`, {
             method: "POST",
@@ -74,6 +78,10 @@ export default class Api {
             .then(user => this._checkRes(user))
     }
 
+    /**
+     * 
+     * cambiamos el like 
+     */
     changeLikeStatus(cardId, cardLike) {
         const methodStatus = cardLike ? 'DELETE' : 'PUT';
         return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
@@ -81,8 +89,18 @@ export default class Api {
             headers: this._headers
         })
             .then(likes => this._checkRes(likes));
+    }
 
-        /* console.log(data.cardId);
-        console.log(data.cardLike) */
+    /**
+     * 
+     * @param {*} cardId "id del card que sera eliminado"
+     * @returns 
+     */
+    deleteCard(cardId) {
+        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+            method: "DELETE",
+            headers: this._headers
+        })
+            .then(cardelete => this._checkRes(cardelete))
     }
 }

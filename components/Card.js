@@ -58,11 +58,12 @@ export default class Card {
         const eventoclickDelete = new CustomEvent(
           'deleteCardBtn', {
           detail: {
-            cardId: this._id
+            cardId: this._id,
+            element: this._element
           }
         }
         )
-        /* this._element.remove(); */
+        /*  this._element.remove(); */
         document.dispatchEvent(eventoclickDelete);
       });
   }

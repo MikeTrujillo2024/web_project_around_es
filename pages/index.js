@@ -11,7 +11,8 @@ import {
   settingsValidator,
   getinfo,
   addimg,
-  formElements
+  formElements,
+  aceptPopup
 } from "../src/utils.js";
 let cardList;
 /**
@@ -119,13 +120,31 @@ api.getInitialCards().then((cards) => {
 })
   .catch((err) => {
     console.log(`Hay un error : ${err}`);
+    cardList.remove();
   })
 
 //enviamos el evento delete 
 document.addEventListener('deleteCardBtn', (e) => {
   const detail = e.detail.cardId;
-  const popupconfirmation = new PopupWithConfirmation({ selector: "#popup-confirmation", detail: detail });
-  popupconfirmation.setEventListeners()
+  const elment = e.detail.element;
+
+  const popupconfirmation = new PopupWithConfirmation({
+    selector: "#popup-confirmation",
+    detail: detail,
+    btnSubmit: aceptPopup
+  });
+
+  popupconfirmation.setEventListeners();
+  document.addEventListener('deleteCustomEvent', (e) => {
+    api.deleteCard(e.detail.cardId)
+      .then(() => {
+        console.log("eliminada la carta");
+        popupconfirmation.close();
+        elment.remove()
+      })
+      .catch((err) => { `error : ${err}` })
+  })
+  /* popupconfirmation.showData(detail); */
 })
 
 
@@ -150,10 +169,7 @@ const addNewImage = new PopupWithForm({
   submitCallback: (formData) => {
     api.addCard(formData).then((data) => {
       const newCard = new Card(
-        {
-          name: data.name,
-          link: data.link
-        },
+        data,
         "#card-template",
         handleCardClick
 
@@ -164,8 +180,6 @@ const addNewImage = new PopupWithForm({
     }).catch((err) => {
       console.log(`Hay un error: ${err}`)
     })
-
-
   }
 
 });

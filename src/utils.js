@@ -40,14 +40,15 @@ const settingsValidator = {
   typeSubmit: "submit",
   typeInput: "input",
   formbuttonSubmit: ".popup__content-save",
-  formbuttonSubmitUser:'#idpopup__content-save'
+  formbuttonSubmitUser: '#idpopup__content-save'
 };
 
 const btn_popup__save = document.querySelector(settingsValidator.formbuttonSubmitUser); //tenemos el boton de guardar de updateInfoUSer
 const getinfo = document.querySelector(".profile__info_edit_button"); //boton que selecciona el boton de editar user
 const addimg = document.querySelector(".profile__info-button-add"); //boton que selecciona el boton de editar user
+const aceptPopup = document.querySelector(".popup__content-save-message"); //boton de aceptar eliminar o actualizar
 /**
  * constiene todods los formularios
  */
 const formElements = document.querySelectorAll(settingsValidator.formSelector);
-export { btn_popup__save, settingsValidator, getinfo, addimg, formElements}
+export { btn_popup__save, settingsValidator, getinfo, addimg, formElements, aceptPopup }
