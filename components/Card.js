@@ -6,8 +6,11 @@ export default class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._title = data.name;
     this._link = data.link;
+    this._id = data._id;
+    this._likebtn = data.isLiked;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+
   }
 
   /**
@@ -32,7 +35,15 @@ export default class Card {
     this._element
       .querySelector(".place__card_content_like")
       .addEventListener("click", (e) => {
-        e.target.classList.toggle("place_card_content_like--active");
+        const eventoclickLike = new CustomEvent(
+          'likeCardBtn', {
+          detail: {
+            cardId: this._id,
+            cardLike: this._likebtn,
+            cardClassList: e.target.classList
+          }
+        });
+        document.dispatchEvent(eventoclickLike);
       });
   }
 
@@ -43,8 +54,17 @@ export default class Card {
   _trash() {
     this._element
       .querySelector(".place__card_trash")
-      .addEventListener("click", () => {
-        this._element.remove();
+      .addEventListener("click", (e) => {
+        const eventoclickDelete = new CustomEvent(
+          'deleteCardBtn', {
+          detail: {
+            cardId: this._id,
+            element: this._element
+          }
+        }
+        )
+        /*  this._element.remove(); */
+        document.dispatchEvent(eventoclickDelete);
       });
   }
 
@@ -53,6 +73,7 @@ export default class Card {
    * Este metodo sirve para mostra el popup al hacer click en la imagen
    */
   _imgPopup() {
+
     this._element
       .querySelector(".place__card_image")
       .addEventListener("click", () => {
@@ -70,11 +91,22 @@ export default class Card {
   }
 
   /**
+   * 
+   * esta clase hace que se pinten los like si es que este viene true
+   */
+  _showLikeBtn(likeBolean) {
+    if (likeBolean) {
+      this._element.querySelector(".place__card_content_like").classList.add("place_card_content_like--active")
+    }
+  }
+
+  /**
    * aqui es donde creamos los card
    * hasta este momento esta construido cada elemenmto pero no esta visible en el dom
    */
   getCreateCard() {
     this._element = this._getTemplate();
+    this._showLikeBtn(this._likebtn);
     this._setListener();
 
     this._element.querySelector(".place__card_image").src = this._link;
@@ -83,6 +115,8 @@ export default class Card {
 
     return this._element;
   }
+
+
 
 }
 

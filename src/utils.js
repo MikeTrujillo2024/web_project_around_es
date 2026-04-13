@@ -1,5 +1,5 @@
 const initialCards = [
-  {
+  /* {
     name: "Valle de Yosemite",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
   },
@@ -22,7 +22,7 @@ const initialCards = [
   {
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
+  }, */
 ];
 
 /**
@@ -40,9 +40,18 @@ const settingsValidator = {
   typeSubmit: "submit",
   typeInput: "input",
   formbuttonSubmit: ".popup__content-save",
+  formbuttonSubmitUser: '#idpopup__content-save'
 };
 
-
+const btn_popup__save = document.querySelector(settingsValidator.formbuttonSubmitUser); //tenemos el boton de guardar de updateInfoUSer
+const btn_submit_image = document.querySelector(settingsValidator.formbuttonSubmit); // boton de agregar una nueva imagen
 const getinfo = document.querySelector(".profile__info_edit_button"); //boton que selecciona el boton de editar user
 const addimg = document.querySelector(".profile__info-button-add"); //boton que selecciona el boton de editar user
-export { initialCards, settingsValidator, getinfo, addimg }
+const aceptPopup = document.querySelector(".popup__content-save-message"); //boton de aceptar eliminar o actualizar
+const avatar = document.querySelector(".profile__image-edit"); //boton de cambio de iamgen de avatar
+const btnSubmitAvatar = document.querySelector(".popup__content-saveAvatar") // boton submit para cambiar el avatar
+/**
+ * constiene todods los formularios
+ */
+const formElements = document.querySelectorAll(settingsValidator.formSelector);
+export { btn_popup__save, settingsValidator, getinfo, addimg, formElements, aceptPopup, avatar, btnSubmitAvatar, btn_submit_image }

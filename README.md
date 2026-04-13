@@ -19,4 +19,4 @@ se returlizan funciones para evitar la sobrecarga de datos
 
 ## enlase a gitpages
 
-https://miketrujillo2024.github.io/web_project_around/
+https://miketrujillo2024.github.io/web_project_around_es/

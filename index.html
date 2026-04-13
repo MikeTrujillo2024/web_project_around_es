@@ -1,148 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Pagina para mostrar la ida a EEUU" />
-    <meta name="author" content="Miguel Angel Fernandez Trujillo" />
-    <title>Alrededor de los EE.UU.</title>
-    <link rel="stylesheet" href="./pages/index.css" />
-  </head>
-  <body>
-    <div class="page">
-      <div class="popup popup_opened" id="popup-places">
-        <div class="popup__wrap">
-          <button class="popup__button-cancel" id="popup__button-cancelForm">
-            +
-          </button>
-          <form
-            class="popup__container"
-            id="popup__container-addCard"
-            novalidate
-          >
-            <fieldset class="popup__content" id="FormCard">
-              <h1 class="popup__content-title">Nuevo Lugar</h1>
-              <input
-                class="popup__input popup__content-name"
-                type="text"
-                name="titulo"
-                placeholder="Titulo"
-                id="input__popup_name"
-                minlength="2"
-                maxlength="30"
-                required
-              />
-              <span class="popup__input_error input__popup_name-error"></span>
-              <input
-                class="popup__input popup__content-about"
-                type="url"
-                name="url"
-                placeholder="Enlace a la imagen"
-                id="input-link"
-                required
-              />
-              <span class="popup__input_error input-link-error"></span>
-              <button type="submit" class="popup__content-save" id="create">
-                Guardar
-              </button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-      <div class="popup popup_opened" id="popup-profile">
-        <div class="popup__wrap">
-          <button class="popup__button-cancel">+</button>
-          <form class="popup__container">
-            <fieldset class="popup__content">
-              <h1 class="popup__content-title">Editar Perfil</h1>
-              <input
-                class="popup__input popup__content-name"
-                type="text"
-                name="name__user"
-                placeholder="Nombre"
-                id="input__popup_name_Editar"
-                minlength="2"
-                maxlength="40"
-                required
-              />
-              <span
-                class="form__input_error input__popup_name_Editar-error"
-              ></span>
-              <input
-                class="popup__input popup__content-about"
-                type="text"
-                name="about"
-                placeholder="Acerca de mi"
-                id="input_popup_about"
-                minlength="2"
-                maxlength="200"
-                required
-              />
-              <span class="form__input_error input_popup_about-error"></span>
-              <button type="submit" class="popup__content-save">Guardar</button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-      <div class="popup popup_opened" id="popup-image">
-        <div class="popup__wrap">
-          <button class="popup__button-cancel" id="popup__button-cancel-imagen">
-            +
-          </button>
-          <img class="popup__img" src=" " alt="Empty Image" />
-          <h2 class="popup__img-title"></h2>
-        </div>
-      </div>
-      <header class="header">
-        <img
-          src="./images/homeLogo.png"
-          alt="imagen homeLogo"
-          class="header__logo"
-        />
-      </header>
-      <main class="content">
-        <section class="content profile">
-          <img
-            src="images/cara.jpg"
-            alt="image property of session"
-            class="profile__image"
-          />
-          <div class="profile__info">
-            <p class="profile__name">Jacques Cousteau</p>
-            <button
-              type="button"
-              class="profile__info profile__info_edit_button"
-            ></button>
-            <span class="profile__info profile__about">Explorador</span>
-          </div>
-          <button type="button" class="profile__inf profile__info-button-add">
-            +
-          </button>
-        </section>
-        <section class="place" id="place"></section>
-      </main>
-      <footer class="footer">
-        <p>@ 2025 Around The U.S.</p>
-      </footer>
-    </div>
 
-    <template id="card-template">
-      <div class="place__card">
-        <button type="button" class="place__card_trash"></button>
-        <img
-          src=" "
-          alt="image card place"
-          class="place__card place__card_image"
-        />
-        <div class="place__card place__card_content">
-          <p class="place__card place__card_content_text"></p>
-          <button
-            type="button"
-            class="place__card place__card_content_like"
-          ></button>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pagina para mostrar la ida a EEUU" />
+  <meta name="author" content="Miguel Angel Fernandez Trujillo" />
+  <title>Alrededor de los EE.UU.</title>
+  <link rel="stylesheet" href="./pages/index.css" />
+</head>
+
+<body>
+  <div class="page">
+    <div class="popup popup_opened" id="popup-places">
+      <div class="popup__wrap">
+        <button class="popup__button-cancel" id="popup__button-cancelForm">
+          +
+        </button>
+        <form class="popup__container" id="popup__container-addCard" novalidate>
+          <fieldset class="popup__content" id="FormCard">
+            <h1 class="popup__content-title">Nuevo Lugar</h1>
+            <input class="popup__input popup__content-name" type="text" name="titulo" placeholder="Titulo"
+              id="input__popup_name" minlength="2" maxlength="30" required />
+            <span class="popup__input_error input__popup_name-error"></span>
+            <input class="popup__input popup__content-about" type="url" name="url" placeholder="Enlace a la imagen"
+              id="input-link" required />
+            <span class="popup__input_error input-link-error"></span>
+            <button type="submit" class="popup__content-save" id="create">
+              Guardar
+            </button>
+          </fieldset>
+        </form>
       </div>
-    </template>
-    <script type="module" src="pages/index.js"></script>
-  </body>
+    </div>
+    <div class="popup popup_opened" id="popup-profile">
+      <div class="popup__wrap">
+        <button class="popup__button-cancel">+</button>
+        <form class="popup__container">
+          <fieldset class="popup__content">
+            <h1 class="popup__content-title">Editar Perfil</h1>
+            <input class="popup__input popup__content-name" type="text" name="name__user" placeholder="Nombre"
+              id="input__popup_name_Editar" minlength="2" maxlength="40" required />
+            <span class="form__input_error input__popup_name_Editar-error"></span>
+            <input class="popup__input popup__content-about" type="text" name="about" placeholder="Acerca de mi"
+              id="input_popup_about" minlength="2" maxlength="200" required />
+            <span class="form__input_error input_popup_about-error"></span>
+            <button type="submit" id="idpopup__content-save" class="popup__content-save">Guardar</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_opened" id="popup-image">
+      <div class="popup__wrap">
+        <button class="popup__button-cancel" id="popup__button-cancel-imagen">
+          +
+        </button>
+        <img class="popup__img" src=" " alt="Empty Image" />
+        <h2 class="popup__img-title"></h2>
+      </div>
+    </div>
+    <div class="popup popup_opened" id="popup-confirmation">
+      <div class="popup__wrap">
+        <button class="popup__button-cancel" id="popup__button-cancel-confirmation">
+          +
+        </button>
+        <form action="" class="popup__container popup__container-confirmation">
+          <fieldset class="popup__content popup__content-message">
+            <h2 class="popup__content-title">¿Estas Seguro?</h2>
+            <button type="submit" id="" class="popup__content-save popup__content-save-message">SI</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_opened" id="popup-profile-avatar">
+      <div class="popup__wrap">
+        <button class="popup__button-cancel">+</button>
+        <form class="popup__container">
+          <fieldset class="popup__content">
+            <h1 class="popup__content-title">Cambiar foto de perfil</h1>
+            <input class="popup__input popup__content-name" type="url" name="url__avatar" placeholder="url imagen"
+              id="input__popup_avatar_Editar" required />
+            <span class="form__input_error input__popup_avatar_Editar-error"></span>
+            <button type="submit" id="idpopup__content-saveAvatar"
+              class="popup__content-save popup__content-saveAvatar">Guardar</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <header class="header">
+      <img src="./images/homeLogo.png" alt="imagen homeLogo" class="header__logo" />
+    </header>
+    <main class="content">
+      <section class="content profile">
+        <img src="images/sinfoto.jpeg" alt="image property of session" class="profile__image" />
+        <div class="profile__image profile__image-edit"></div>
+        <div class="profile__info">
+          <p class="profile__name"></p>
+          <button type="button" class="profile__info profile__info_edit_button"></button>
+          <span class="profile__info profile__about"></span>
+        </div>
+        <button type="button" class="profile__inf profile__info-button-add">
+          +
+        </button>
+      </section>
+      <section class="place" id="place"></section>
+    </main>
+    <footer class="footer">
+      <p>@ 2025 Around The U.S.</p>
+    </footer>
+  </div>
+
+  <template id="card-template">
+    <div class="place__card">
+      <button type="button" class="place__card_trash"></button>
+      <img src=" " alt="image card place" class="place__card place__card_image" />
+      <div class="place__card place__card_content">
+        <p class="place__card place__card_content_text"></p>
+        <button type="button" class="place__card place__card_content_like"></button>
+      </div>
+    </div>
+  </template>
+  <script type="module" src="pages/index.js"></script>
+</body>
+
 </html>
