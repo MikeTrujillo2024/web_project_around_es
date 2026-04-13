@@ -77,8 +77,8 @@ profilePopup.setEventListeners();
  */
 getinfo.addEventListener("click", () => {
   const { name, about } = user.getUserInfo();
-  document.querySelector("#input__popup_name_Editar").value = name;
-  document.querySelector("#input_popup_about").value = about;
+  document.querySelector("#popup__input_name_Editar").value = name;
+  document.querySelector("#popup__input_about").value = about;
 
 
   profilePopup.open()
