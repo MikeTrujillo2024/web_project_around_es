@@ -9,7 +9,6 @@ export default class PopupWithForm extends Popup {
         //obtenemos los datos de todos los inputs que registe en el formulario
         this._formInputs = Array.from(this._form.querySelectorAll(".popup__input"));
 
-
     }
 
     /**

@@ -12,7 +12,10 @@ import {
   getinfo,
   addimg,
   formElements,
-  aceptPopup
+  aceptPopup,
+  avatar,
+  btnSubmitAvatar,
+  btn_submit_image
 } from "../src/utils.js";
 let cardList;
 /**
@@ -64,9 +67,6 @@ const profilePopup = new PopupWithForm({
           profilePopup.close()
         }, 2000)
       })
-      .finally(() => {
-
-      })
   }
 });
 
@@ -83,6 +83,36 @@ getinfo.addEventListener("click", () => {
 
   profilePopup.open()
 });
+
+
+/**
+ * hacemos el cambio de la imagen del avatar
+ */
+const profileAvatar = new PopupWithForm({
+  selector: "#popup-profile-avatar",
+  submitCallback: (formData) => {
+    btnSubmitAvatar.textContent = "Guardando..."
+    api.updateAvatar(formData)
+      .then((data) => {
+        setTimeout(() => {
+          user.setUserAvatar(data.avatar)
+          profileAvatar.close();
+        }, 2000)
+      })
+      .catch(errAvatar => { console.log(`hay un error: ${errAvatar}`) })
+      .finally(() => {
+        btnSubmitAvatar.textContent = "Guardar";
+      })
+
+  }
+})
+
+profileAvatar.setEventListeners();
+
+avatar.addEventListener("click", () => {
+  profileAvatar.open()
+});
+
 
 
 /**
@@ -167,19 +197,28 @@ const handleCardClick = (link, name) => {
 const addNewImage = new PopupWithForm({
   selector: "#popup-places",
   submitCallback: (formData) => {
-    api.addCard(formData).then((data) => {
-      const newCard = new Card(
-        data,
-        "#card-template",
-        handleCardClick
+    btn_submit_image.textContent = "Agregando..."
+    api.addCard(formData)
+      .then((data) => {
+        setTimeout(() => {
+          const newCard = new Card(
+            data,
+            "#card-template",
+            handleCardClick
 
-      );
-      cardList.addItem(newCard.getCreateCard());
-      addNewImage.close();
+          );
+          cardList.addItem(newCard.getCreateCard());
+          addNewImage.close();
 
-    }).catch((err) => {
-      console.log(`Hay un error: ${err}`)
-    })
+
+        }, 2000)
+
+      }).catch((err) => {
+        console.log(`Hay un error: ${err}`)
+      })
+      .finally(() => {
+        btn_submit_image.textContent = "Guardar"
+      })
   }
 
 });
@@ -194,7 +233,4 @@ addimg.addEventListener("click", () => {
 formElements.forEach((formElement) => {
   const formvalid = new FormValidator(settingsValidator, formElement);
   formvalid.enableValidation();
-})
-
-
-/* */;
+});

@@ -51,7 +51,7 @@ export default class Api {
 
     /**
      * 
-     * carga la informacion del usuiario tanto la imagen como el nombre y tipo usuario
+     * carga la informacion del usuario tanto la imagen como el nombre y tipo usuario
      */
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
@@ -102,5 +102,20 @@ export default class Api {
             headers: this._headers
         })
             .then(cardelete => this._checkRes(cardelete))
+    }
+
+    /**
+     * 
+     */
+
+    updateAvatar(avatar) {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
+            method: "PATCH",
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: avatar.url__avatar
+            })
+        })
+            .then(imgAvatar => this._checkRes(imgAvatar))
     }
 }
