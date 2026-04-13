@@ -13,7 +13,7 @@ export default class Api {
      *no es ok manda el error
      */
 
-    _checkRes(res) {
+    async _checkRes(res) {
 
         if (res.ok) {
             return res.json();
@@ -25,8 +25,8 @@ export default class Api {
      * 
      * muestra las cards cuando carga la página
      */
-    getInitialCards() {
-        return fetch(`${this._baseUrl}/cards`, {
+    async getInitialCards() {
+        return await fetch(`${this._baseUrl}/cards`, {
             method: "GET",
             headers: this._headers
         })
@@ -37,8 +37,8 @@ export default class Api {
      * 
      * agrega una nueva card
      */
-    addCard(data) {
-        return fetch(`${this._baseUrl}/cards`, {
+    async addCard(data) {
+        return await fetch(`${this._baseUrl}/cards`, {
             method: "POST",
             headers: this._headers,
             body: JSON.stringify({
@@ -53,8 +53,8 @@ export default class Api {
      * 
      * carga la informacion del usuario tanto la imagen como el nombre y tipo usuario
      */
-    getUserInfo() {
-        return fetch(`${this._baseUrl}/users/me`, {
+    async getUserInfo() {
+        return await fetch(`${this._baseUrl}/users/me`, {
             method: "GET",
             headers: this._headers
         })
@@ -66,8 +66,8 @@ export default class Api {
      * @param {*} data "editamos tanto el nombre del usuario como el tipo de usaurio" 
      * @returns 
      */
-    editUserInfo(data) {
-        return fetch(`${this._baseUrl}/users/me`, {
+    async editUserInfo(data) {
+        return await fetch(`${this._baseUrl}/users/me`, {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
@@ -82,9 +82,9 @@ export default class Api {
      * 
      * cambiamos el like 
      */
-    changeLikeStatus(cardId, cardLike) {
+    async changeLikeStatus(cardId, cardLike) {
         const methodStatus = cardLike ? 'DELETE' : 'PUT';
-        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        return await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: methodStatus,
             headers: this._headers
         })
@@ -96,8 +96,8 @@ export default class Api {
      * @param {*} cardId "id del card que sera eliminado"
      * @returns 
      */
-    deleteCard(cardId) {
-        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    async deleteCard(cardId) {
+        return await fetch(`${this._baseUrl}/cards/${cardId}`, {
             method: "DELETE",
             headers: this._headers
         })
@@ -108,8 +108,8 @@ export default class Api {
      * 
      */
 
-    updateAvatar(avatar) {
-        return fetch(`${this._baseUrl}/users/me/avatar`, {
+    async updateAvatar(avatar) {
+        return await fetch(`${this._baseUrl}/users/me/avatar`, {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
