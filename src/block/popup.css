@@ -141,6 +141,7 @@
 .form__input-error_active {
   color: #f00;
   font-size: 14px;
+  border-bottom: none;
 }
 
 .popup__button_inactive {
