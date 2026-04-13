@@ -1,4 +1,4 @@
-import { settingsValidator } from "../src/utils.js";
+import { settingsValidator } from "../utils/utils.js";
 /**
  * constructor que tiene dos parametros
  * el primero es un objeto de la configuracion que almacena los selectores y las clases del formulario

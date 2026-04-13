@@ -16,7 +16,7 @@ import {
   avatar,
   btnSubmitAvatar,
   btn_submit_image
-} from "../src/utils.js";
+} from "../utils/utils.js";
 let cardList;
 /**
  * conectamos con el servidor meidante una la sig pagina y con la authorizacion
