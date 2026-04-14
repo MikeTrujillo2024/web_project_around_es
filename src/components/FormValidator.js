@@ -1,4 +1,3 @@
-import { settingsValidator } from "../utils/utils.js";
 /**
  * constructor que tiene dos parametros
  * el primero es un objeto de la configuracion que almacena los selectores y las clases del formulario
@@ -25,9 +24,11 @@ export default class FormValidator {
    * mostrar el error que se manda desde chekvalidity
    */
   _showInputError(inputElementList, errorMessage) {
+    console.log(inputElementList.id)
     const errorElment = this._elment.querySelector(
       `.${inputElementList.id}-error`
     );
+    console.log(errorElment)
     inputElementList.classList.add(this._config.inactiveButtonClass);
     errorElment.textContent = errorMessage;
     errorElment.classList.add(this._config.InputErrorActive);
@@ -67,12 +68,21 @@ export default class FormValidator {
    *
    */
   _hasInvalidInput() {
-    return this._inputlist.some((inputElment) => {
-      return !inputElment.validity.valid;
-    });
+
+    if (this._inputlist && this._inputlist.length > 0) {
+      return this._inputlist.some((inputElment) => {
+        console.log(inputElment)
+        return !inputElment.validity.valid;
+
+      });
+    } else { console.log("estamos en el else") }
+
   }
 
   _statebutton() {
+    /*   console.log(this._button);
+      console.log(this._config.inactiveButtonClass); */
+    /* console.log(this._button); */
     if (this._hasInvalidInput()) {
       this._button.classList.add(this._config.inactiveButtonClass);
       this._button.setAttribute("disabled", "");
@@ -83,14 +93,18 @@ export default class FormValidator {
   }
 
   _setEventListener() {
-    this._statebutton();
 
-    this._inputlist.forEach((inputElementList) => {
-      inputElementList.addEventListener("input", () => {
-        this._checkInputValidity(inputElementList);
-        this._statebutton();
+    if (this._inputlist.length > 0) {
+      this._statebutton();
+
+      this._inputlist.forEach((inputElementList) => {
+        inputElementList.addEventListener("input", () => {
+          this._checkInputValidity(inputElementList);
+          this._statebutton();
+        });
       });
-    });
+    }
+
   }
 
   /**
