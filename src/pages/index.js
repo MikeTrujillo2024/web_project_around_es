@@ -1,6 +1,5 @@
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
-import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/popupwithform.js";
@@ -17,6 +16,7 @@ import {
   btnSubmitAvatar,
   btn_submit_image
 } from "../utils/utils.js";
+import FormValidator from "../components/FormValidator.js";
 let cardList;
 /**
  * conectamos con el servidor meidante una la sig pagina y con la authorizacion
@@ -77,8 +77,8 @@ profilePopup.setEventListeners();
  */
 getinfo.addEventListener("click", () => {
   const { name, about } = user.getUserInfo();
-  document.querySelector("#input__popup_name_Editar").value = name;
-  document.querySelector("#input_popup_about").value = about;
+  document.querySelector("#popup__input_name_Editar").value = name;
+  document.querySelector("#popup__input_about").value = about;
 
 
   profilePopup.open()
