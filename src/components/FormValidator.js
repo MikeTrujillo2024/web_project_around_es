@@ -24,11 +24,9 @@ export default class FormValidator {
    * mostrar el error que se manda desde chekvalidity
    */
   _showInputError(inputElementList, errorMessage) {
-    console.log(inputElementList.id)
     const errorElment = this._elment.querySelector(
       `.${inputElementList.id}-error`
     );
-    console.log(errorElment)
     inputElementList.classList.add(this._config.inactiveButtonClass);
     errorElment.textContent = errorMessage;
     errorElment.classList.add(this._config.InputErrorActive);
@@ -67,22 +65,16 @@ export default class FormValidator {
    * retorna si el valor es true o false
    *
    */
-  _hasInvalidInput() {
-
-    if (this._inputlist && this._inputlist.length > 0) {
+  _hasInvalidInput() {   
       return this._inputlist.some((inputElment) => {
-        console.log(inputElment)
+      if(inputElment.tagName === "INPUT"){
         return !inputElment.validity.valid;
-
-      });
-    } else { console.log("estamos en el else") }
-
-  }
+      }
+       
+  });
+}
 
   _statebutton() {
-    /*   console.log(this._button);
-      console.log(this._config.inactiveButtonClass); */
-    /* console.log(this._button); */
     if (this._hasInvalidInput()) {
       this._button.classList.add(this._config.inactiveButtonClass);
       this._button.setAttribute("disabled", "");
