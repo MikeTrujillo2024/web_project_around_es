@@ -1,22 +1,50 @@
-# Tripleten web_project_around
+# TripleTen Web Project Around
 
-# Titulo
+## Descripción del proyecto
 
-Alrededor de los EE.UU
+Proyecto web interactivo desarrollado como parte del bootcamp de Desarrollo Web Fullstack en TripleTen. Esta aplicación permite a los usuarios gestionar un perfil personal, agregar, eliminar y dar "me gusta" a imágenes, utilizando buenas prácticas de desarrollo frontend y programación modular.
 
-#descripcion una pagina interactiva que los usuarios pueden añadir, eliminar o dar "me gusta" a las fotos
+## Tecnologías utilizadas
 
-# Tecnologías
+* HTML5
+* CSS3
+* JavaScript (ES6+)
+* Programación Orientada a Objetos (POO)
+* Metodología BEM
+* Webpack
+* Diseño Responsivo
+* Git y GitHub
 
-1.- HTML. estructura del sitio
-2.- css - estilos del sitio
-con la ayuda de media queries, se hace posible en cualquier dispositivo
+## Características principales
 
-3.- JavaScript
-en javascript se usan objetos para crear las card y para validar los datos de los formularios
-se utilizan funciones arrows para mostrar y ocultar modales(son minipantallas flotantes que pueden mostrar fiormularios o imagenes)
-se returlizan funciones para evitar la sobrecarga de datos
+* Edición de perfil de usuario
+* Agregar nuevas tarjetas de imágenes
+* Eliminar tarjetas
+* Botón de "Me gusta"
+* Ventanas emergentes (popups)
+* Validación de formularios
+* Diseño adaptable para dispositivos móviles, tablet y escritorio
 
-## enlase a gitpages
+## Objetivo
 
-https://miketrujillo2024.github.io/web_project_around_es/
+Fortalecer habilidades en desarrollo frontend moderno, estructura de código escalable, componentes reutilizables y buenas prácticas de programación.
+
+## Demo del proyecto
+
+https://miketrujillo2024.github.io/web_project_around_es/src
+
+## Repositorio
+
+https://github.com/MikeTrujillo2024/web_project_around_es
+
+## Autor
+
+Miguel Trujillo
+Desarrollador Fullstack Junior en formación | TripleTen Bootcamp
+
+## Próximas mejoras
+
+* Integración con backend
+* Persistencia de datos con API
+* Mejoras visuales y animaciones
+* Optimización de rendimiento
